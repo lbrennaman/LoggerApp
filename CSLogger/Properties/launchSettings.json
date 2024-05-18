@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSLogger": {
+      "commandName": "Project",
+      "commandLineArgs": "--type ALL --clear -ln test --path test"
+    }
+  }
+}
