@@ -1,5 +1,0 @@
-		5/18/2024 7:01:29 PM | All log
-INFO  | 5/18/2024 7:01:29 PM | Info log
-DEBUG | 5/18/2024 7:01:29 PM | Debug log
-WARN  | 5/18/2024 7:01:29 PM | Warn log
-ERROR | 5/18/2024 7:01:29 PM | Error log
