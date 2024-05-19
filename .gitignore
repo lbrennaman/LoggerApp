@@ -36,8 +36,9 @@
 ehthumbs.db
 Thumbs.db
 
-# bin, obj, and .vs directories
+# bin, obj, .vs, and Properties directories
 #######
 bin
 obj
 .vs
+Properties
