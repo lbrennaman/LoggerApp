@@ -134,23 +134,15 @@ namespace CSLogger
         // Private Methods
         // ###################################################################
 
-        // Convert all / into \ characters
-        private static string linuxPathToWindowsPath(string path)
+        // Method to handle message "type" string when printing
+        private void logType(string type, string line)
         {
-            string tempPath = "";
-            for (int i = 0; i < path.Length; i++)
-            {
-                if (path[i] == '/')
-                {
-                    tempPath += '\\';
-                }
-                else
-                {
-                    tempPath += path[i];
-                }
-            }
+            line = type + DateTime.Now.ToString() + " | " + line;
 
-            return tempPath;
+            using (StreamWriter writer = new StreamWriter(logFileName, true))
+            {
+                writer.WriteLine(line);
+            }
         }
 
         // Parse command line arguments into a list of paired arguments
@@ -205,7 +197,7 @@ namespace CSLogger
             {
                 try
                 {
-                    path = linuxPathToWindowsPath(path);
+                    path = path.Replace('/', '\\');
                     path = validatePathEnding(path);
 
                     if (!string.IsNullOrEmpty(path))
@@ -283,12 +275,7 @@ namespace CSLogger
         // Write ALL line: special because it doesn't use ALL prefix
         public void logAll(string line)
         {
-            line = "\t\t" + DateTime.Now.ToString() + " | " + line;
-
-            using (StreamWriter writer = new StreamWriter(logFileName, true))
-            {
-                writer.WriteLine(line);
-            }
+            logType("\t\t", line);
         }
 
         // Write Info line
@@ -296,12 +283,7 @@ namespace CSLogger
         {
             if (messageType == LogMessageType.INFO || messageType == LogMessageType.ALL)
             {
-                line = "INFO  | " + DateTime.Now.ToString() + " | " + line;
-
-                using (StreamWriter writer = new StreamWriter(logFileName, true))
-                {
-                    writer.WriteLine(line);
-                }
+                logType("INFO  | ", line);
             }
         }
 
@@ -310,12 +292,7 @@ namespace CSLogger
         {
             if (messageType == LogMessageType.DEBUG || messageType == LogMessageType.ALL)
             {
-                line = "DEBUG | " + DateTime.Now.ToString() + " | " + line;
-
-                using (StreamWriter writer = new StreamWriter(logFileName, true))
-                {
-                    writer.WriteLine(line);
-                }
+                logType("DEBUG | ", line);
             }
         }
 
@@ -324,12 +301,7 @@ namespace CSLogger
         {
             if (messageType == LogMessageType.WARN || messageType == LogMessageType.ALL)
             {
-                line = "WARN  | " + DateTime.Now.ToString() + " | " + line;
-
-                using (StreamWriter writer = new StreamWriter(logFileName, true))
-                {
-                    writer.WriteLine(line);
-                }
+                logType("WARN  | ", line);
             }
         }
 
@@ -338,12 +310,7 @@ namespace CSLogger
         {
             if (messageType == LogMessageType.ERROR || messageType == LogMessageType.ALL)
             {
-                line = "ERROR | " + DateTime.Now.ToString() + " | " + line;
-
-                using (StreamWriter writer = new StreamWriter(logFileName, true))
-                {
-                    writer.WriteLine(line);
-                }
+                logType("ERROR | ", line);
             }
         }
     }
